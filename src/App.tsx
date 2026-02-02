@@ -1,4 +1,6 @@
 import { StorySection, TechCard } from './components/Components'
+import { Analytics, track } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 
 function App() {
   return (
@@ -16,7 +18,13 @@ function App() {
           </h1>
 
           <div style={{ marginTop: '4rem', display: 'flex', gap: '2rem', flexWrap: 'wrap', alignItems: 'center' }}>
-            <a href="/RePrompt-Setup-1.0.0.exe" download className="border-box" style={{ backgroundColor: 'var(--primary)', color: 'black', fontWeight: 'bold', padding: '1.5rem 3rem' }}>
+            <a
+              href="/RePrompt-Setup-1.0.0.exe"
+              download
+              onClick={() => track('Download_Windows_Setup')}
+              className="border-box"
+              style={{ backgroundColor: 'var(--primary)', color: 'black', fontWeight: 'bold', padding: '1.5rem 3rem' }}
+            >
               DOWNLOAD FOR WINDOWS
             </a>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -104,6 +112,8 @@ function App() {
       <footer style={{ padding: '4rem', textAlign: 'center', backgroundColor: '#000', opacity: 0.5 }}>
         <span className="text-mono" style={{ fontSize: '0.7rem' }}>© 2026 REPROMPT | BUILT BY AAWEJ PATHAN | 16YRS OLD & BUILDING | <a href="https://aawejpathan.vercel.app" target="_blank" style={{ color: 'inherit' }}>VIEW PORTFOLIO</a></span>
       </footer>
+      <Analytics />
+      <SpeedInsights />
     </div>
   )
 }
