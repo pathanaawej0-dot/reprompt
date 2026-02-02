@@ -84,6 +84,9 @@ function App() {
         <div className="container" style={{ textAlign: 'center' }}>
           <h2 className="text-section-title" style={{ fontSize: '2rem', marginBottom: '3rem' }}>Connect with the Builder</h2>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap' }}>
+            <a href="https://aawejpathan.vercel.app" target="_blank" className="border-box" style={{ minWidth: '200px', textAlign: 'center', borderColor: 'var(--primary)' }}>
+              <span className="text-mono" style={{ color: 'var(--primary)' }}>MY PORTFOLIO</span>
+            </a>
             <a href="https://x.com/AawejPathan786" target="_blank" className="border-box" style={{ minWidth: '200px', textAlign: 'center' }}>
               <span className="text-mono">FOLLOW ON X</span>
             </a>
@@ -99,7 +102,7 @@ function App() {
 
       {/* FOOTER */}
       <footer style={{ padding: '4rem', textAlign: 'center', backgroundColor: '#000', opacity: 0.5 }}>
-        <span className="text-mono" style={{ fontSize: '0.7rem' }}>© 2026 REPROMPT | BUILT BY AAWEJ PATHAN | 16YRS OLD & BUILDING</span>
+        <span className="text-mono" style={{ fontSize: '0.7rem' }}>© 2026 REPROMPT | BUILT BY AAWEJ PATHAN | 16YRS OLD & BUILDING | <a href="https://aawejpathan.vercel.app" target="_blank" style={{ color: 'inherit' }}>VIEW PORTFOLIO</a></span>
       </footer>
     </div>
   )
