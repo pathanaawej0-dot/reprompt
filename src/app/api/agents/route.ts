@@ -1,0 +1,99 @@
+import { NextResponse } from 'next/server';
+import { getVerifiedUserId } from '@/lib/authHelper';
+import { sql } from '@/lib/db';
+import { builtInAgents } from '@/lib/defaultAgents';
+
+export async function GET(req: Request) {
+    try {
+        const userId = await getVerifiedUserId(req);
+        if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+        let agents = await sql`
+            SELECT * FROM agents WHERE user_id = ${userId} ORDER BY created_at DESC
+        `;
+
+        // Auto-seed default agents for new users
+        if (agents.length === 0) {
+            for (const agent of builtInAgents) {
+                await sql`
+                    INSERT INTO agents (
+                        id, user_id, name, shortcut, shortcut_key, system_prompt, 
+                        is_built_in, enabled, icon, updated_at
+                    )
+                    VALUES (
+                        ${`${agent.id}_${userId}`}, ${userId}, ${agent.name}, ${agent.shortcut}, ${agent.shortcut_key}, 
+                        ${agent.system_prompt}, ${agent.is_built_in}, ${agent.enabled}, 
+                        ${agent.icon}, NOW()
+                    )
+                `;
+            }
+            agents = await sql`
+                SELECT * FROM agents WHERE user_id = ${userId} ORDER BY created_at DESC
+            `;
+        }
+
+        return NextResponse.json({ agents });
+    } catch (error: any) {
+        console.error('Fetch agents error:', error);
+        return NextResponse.json({ error: error?.message || 'Internal Server Error' }, { status: 500 });
+    }
+}
+
+export async function POST(req: Request) {
+    try {
+        const userId = await getVerifiedUserId(req);
+        if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+        const body = await req.json();
+        const { id, name, shortcut, shortcut_key, system_prompt, is_built_in, enabled, icon, parent_id } = body;
+
+        if (!id || !name || !system_prompt) {
+            return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+        }
+
+        await sql`
+            INSERT INTO agents (
+                id, user_id, name, shortcut, shortcut_key, system_prompt, 
+                is_built_in, enabled, icon, parent_id, updated_at
+            )
+            VALUES (
+                ${id}, ${userId}, ${name}, ${shortcut || null}, ${shortcut_key || null}, 
+                ${system_prompt}, ${is_built_in || false}, ${enabled !== false}, 
+                ${icon || null}, ${parent_id || null}, NOW()
+            )
+            ON CONFLICT (id) DO UPDATE 
+            SET
+                name = EXCLUDED.name,
+                shortcut = EXCLUDED.shortcut,
+                shortcut_key = EXCLUDED.shortcut_key,
+                system_prompt = EXCLUDED.system_prompt,
+                enabled = EXCLUDED.enabled,
+                icon = EXCLUDED.icon,
+                updated_at = NOW()
+        `;
+
+        return NextResponse.json({ success: true, agentId: id });
+    } catch (error: any) {
+        console.error('Upsert agent error:', error);
+        return NextResponse.json({ error: error?.message || 'Internal Server Error' }, { status: 500 });
+    }
+}
+
+export async function DELETE(req: Request) {
+    try {
+        const userId = await getVerifiedUserId(req);
+        if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+        const { searchParams } = new URL(req.url);
+        const id = searchParams.get('id');
+
+        if (!id) return NextResponse.json({ error: 'Agent ID required' }, { status: 400 });
+
+        await sql`DELETE FROM agents WHERE id = ${id} AND user_id = ${userId}`;
+
+        return NextResponse.json({ success: true });
+    } catch (error: any) {
+        console.error('Delete agent error:', error);
+        return NextResponse.json({ error: error?.message || 'Internal Server Error' }, { status: 500 });
+    }
+}

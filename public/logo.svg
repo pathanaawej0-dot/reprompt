@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="1024" height="1024">
+  <defs>
+    <linearGradient id="neon-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#CCFF00;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#AAFF00;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+  
+  <g id="reprompt-logo" fill="url(#neon-glow)">
+    <!-- The Spine: Solid, industrial vertical pillar with chamfered base -->
+    <path d="M96,64 L176,64 L176,448 L128,448 L96,416 Z"/>
+
+    <!-- The Head & Bolt: Integrated geometric form -->
+    <!-- The shape forms the loop of the R and transitions sharply into a lightning bolt leg -->
+    <path d="M192,64 L384,64 L432,112 L432,224 L320,224 L368,288 L448,448 L336,448 L256,288 L192,288 Z M272,128 L352,128 L352,160 L272,160 Z" fill-rule="evenodd"/>
+  </g>
+</svg>
