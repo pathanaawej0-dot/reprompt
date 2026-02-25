@@ -30,24 +30,27 @@ export default function FounderPage() {
                 {/* HEADER */}
                 <header style={{ textAlign: 'center', marginBottom: '64px' }}>
                     <div style={{
-                        width: '120px',
-                        height: '120px',
-                        borderRadius: '50%',
-                        background: 'linear-gradient(135deg, var(--md-sys-color-primary), #ec4899)',
-                        margin: '0 auto 24px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '48px',
-                        boxShadow: '0 0 40px rgba(99, 102, 241, 0.3)'
+                        width: '180px',
+                        height: '180px',
+                        borderRadius: '32px',
+                        overflow: 'hidden',
+                        margin: '0 auto 32px',
+                        boxShadow: '0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(99, 102, 241, 0.2)',
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        position: 'relative'
                     }}>
-                        A
+                        <Image
+                            src="/founder.png"
+                            alt="Aawej - Founder of RePrompt"
+                            fill
+                            style={{ objectFit: 'cover' }}
+                        />
                     </div>
-                    <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '48px', fontWeight: 600, marginBottom: '16px', letterSpacing: '-1px' }}>
+                    <h1 style={{ fontFamily: 'var(--font-display)', fontSize: '48px', fontWeight: 600, marginBottom: '16px', letterSpacing: '-1.5px' }}>
                         The Founder's Story
                     </h1>
-                    <p style={{ fontSize: '18px', opacity: 0.6, maxWidth: '600px', margin: '0 auto' }}>
-                        A mission to democratize high-end AI tools, built from a bedroom in Satara.
+                    <p style={{ fontSize: '20px', opacity: 0.6, maxWidth: '600px', margin: '0 auto', fontWeight: 400 }}>
+                        Building the future of AI productivity from Satara.
                     </p>
                 </header>
 

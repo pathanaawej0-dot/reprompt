@@ -4,7 +4,7 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { Target, SearchX, FastForward, Wand2, Coffee, Sparkles, VolumeX, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Target, SearchX, FastForward, Wand2, Coffee, Sparkles, VolumeX, ShieldCheck, ArrowRight, Heart } from 'lucide-react';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
