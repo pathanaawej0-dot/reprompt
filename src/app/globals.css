@@ -345,8 +345,184 @@ body {
   box-shadow: 0 0 0 1px var(--md-sys-color-primary);
 }
 
-/* Misc Utilities */
-.md-divider {
-  border-top: 1px solid var(--md-sys-color-outline-variant);
-  margin: 24px 0;
+/* MD3 Typography Overrides for Landing Page */
+.sys-headline-xl {
+  font-family: var(--font-display);
+  font-size: clamp(60px, 12vw, 140px);
+  line-height: 0.85;
+  letter-spacing: -4px;
+}
+
+/* Premium Animations */
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealRight {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+
+.reveal-up {
+  opacity: 0;
+  animation: revealUp 1.2s cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+.reveal-up-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.reveal-up-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.reveal-up-delay-3 {
+  animation-delay: 0.3s;
+}
+
+/* Refined Glassmorphism */
+.glass-premium {
+  background: rgba(30, 31, 32, 0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.glow-bg {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(140, 252, 66, 0.1) 0%, rgba(140, 252, 66, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  animation: glowPulse 10s infinite ease-in-out;
+}
+
+/* Navigation Bar Dynamic Transitions */
+.nav-header {
+  transition: all 0.6s cubic-bezier(0.2, 0, 0, 1);
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  border-radius: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: transparent;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  z-index: 100;
+}
+
+.nav-header.scrolled {
+  width: 90%;
+  max-width: 1000px;
+  margin: 20px auto;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(19, 19, 20, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* Immersive Fullscreen Sticky Stacking System */
+.stack-container {
+  position: relative;
+  width: 100%;
+  background: var(--md-sys-color-background);
+}
+
+.stack-section {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 -24px 64px rgba(0, 0, 0, 0.4);
+  border-top-left-radius: 48px;
+  border-top-right-radius: 48px;
+  /* Creates depth when sliding over */
+}
+
+/* Happy Premium Color Backgrounds for Flow */
+.bg-deep {
+  background: #0A0A0B;
+}
+
+.bg-indigo {
+  background: linear-gradient(135deg, #100C2A 0%, #0A0A0B 100%);
+}
+
+.bg-emerald {
+  background: linear-gradient(135deg, #091C10 0%, #0A0A0B 100%);
+}
+
+.bg-violet {
+  background: linear-gradient(135deg, #1A0B1E 0%, #0A0A0B 100%);
+}
+
+.bg-surface {
+  background: #131314;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .nav-header.scrolled {
+    width: 95%;
+    border-radius: 24px;
+  }
+
+  .content-wrapper {
+    padding: 0 24px;
+    align-items: flex-start;
+    text-align: left;
+  }
 }
