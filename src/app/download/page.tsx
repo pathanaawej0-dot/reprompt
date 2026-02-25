@@ -18,10 +18,6 @@ export default function DownloadPage() {
     return (
         <div style={{ backgroundColor: '#0A0A0B', minHeight: '100vh', color: '#fff' }}>
 
-            {/* BACKGROUND DECORATION */}
-            <div className="glow-bg" style={{ top: '20%', left: '30%', opacity: 0.1 }}></div>
-            <div className="glow-bg" style={{ bottom: '10%', right: '20%', opacity: 0.05, background: 'var(--md-sys-color-primary)' }}></div>
-
             {/* NAV BAR */}
             <header style={{
                 height: '72px',
@@ -72,12 +68,8 @@ export default function DownloadPage() {
                 {/* PRIMARY CTA */}
                 <div style={{
                     padding: '80px',
-                    borderRadius: '40px',
-                    backgroundColor: 'rgba(255,255,255,0.02)',
-                    border: '1px solid rgba(255,255,255,0.05)',
                     textAlign: 'center',
-                    marginBottom: '80px',
-                    backdropFilter: 'blur(20px)'
+                    marginBottom: '80px'
                 }}>
                     <h3 style={{ fontSize: '24px', fontWeight: 600, marginBottom: '40px' }}>RePrompt for Windows</h3>
                     <a href="/reprompt.exe" download className="md-btn" style={{
@@ -99,20 +91,25 @@ export default function DownloadPage() {
                     <p style={{ marginTop: '24px', opacity: 0.4, fontSize: '14px' }}>Version 1.0.0 • Approx 74MB</p>
                 </div>
 
-                {/* FEATURES GRID */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
-                    <div style={{ padding: '32px', borderRadius: '32px', backgroundColor: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.03)' }}>
-                        <MonitorCheck style={{ color: 'var(--md-sys-color-primary)', marginBottom: '16px' }} />
+                {/* FEATURES LIST (CLEAN) */}
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gap: '48px',
+                    textAlign: 'center'
+                }}>
+                    <div>
+                        <MonitorCheck style={{ color: 'var(--md-sys-color-primary)', marginBottom: '16px', margin: '0 auto 16px' }} />
                         <h4 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '8px' }}>Global Hotkey</h4>
                         <p style={{ opacity: 0.6, fontSize: '14px', lineHeight: 1.6 }}>Access RePrompt anywhere in your OS with a single keystroke. No context switching.</p>
                     </div>
-                    <div style={{ padding: '32px', borderRadius: '32px', backgroundColor: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.03)' }}>
-                        <Zap style={{ color: 'var(--md-sys-color-primary)', marginBottom: '16px' }} />
+                    <div>
+                        <Zap style={{ color: 'var(--md-sys-color-primary)', marginBottom: '16px', margin: '0 auto 16px' }} />
                         <h4 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '8px' }}>Instant Refuel</h4>
                         <p style={{ opacity: 0.6, fontSize: '14px', lineHeight: 1.6 }}>Real-time synchronization with your Web Dashboard ensures your custom agents are always ready.</p>
                     </div>
-                    <div style={{ padding: '32px', borderRadius: '32px', backgroundColor: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.03)' }}>
-                        <ShieldCheck style={{ color: 'var(--md-sys-color-primary)', marginBottom: '16px' }} />
+                    <div>
+                        <ShieldCheck style={{ color: 'var(--md-sys-color-primary)', marginBottom: '16px', margin: '0 auto 16px' }} />
                         <h4 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '8px' }}>Local Security</h4>
                         <p style={{ opacity: 0.6, fontSize: '14px', lineHeight: 1.6 }}>Your prompts and configurations stay encrypted and local until optimization is requested.</p>
                     </div>
