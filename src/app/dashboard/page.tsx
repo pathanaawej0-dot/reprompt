@@ -393,7 +393,7 @@ export default function DashboardPage() {
                                         <span style={{ color: 'var(--md-sys-color-primary)', marginRight: '16px', fontSize: '18px' }}>✓</span> 10 Credits / month
                                     </li>
                                     <li style={{ marginBottom: '16px', display: 'flex', alignItems: 'center' }}>
-                                        <span style={{ color: 'var(--md-sys-color-primary)', marginRight: '16px', fontSize: '18px' }}>✓</span> Standard Llama-3.3-70b
+                                        <span style={{ color: 'var(--md-sys-color-primary)', marginRight: '16px', fontSize: '18px' }}>✓</span> RePrompt Agent 1.0 Access
                                     </li>
                                     <li style={{ marginBottom: '16px', display: 'flex', alignItems: 'center' }}>
                                         <span style={{ color: 'var(--md-sys-color-primary)', marginRight: '16px', fontSize: '18px' }}>✓</span> Basic Agents
@@ -420,7 +420,7 @@ export default function DashboardPage() {
                                         <span style={{ color: 'var(--md-sys-color-primary)', marginRight: '16px', fontSize: '18px' }}>✓</span> 1500 Credits / month
                                     </li>
                                     <li style={{ marginBottom: '16px', display: 'flex', alignItems: 'center' }}>
-                                        <span style={{ color: 'var(--md-sys-color-primary)', marginRight: '16px', fontSize: '18px' }}>✓</span> Priority Llama-3.3-70b
+                                        <span style={{ color: 'var(--md-sys-color-primary)', marginRight: '16px', fontSize: '18px' }}>✓</span> Priority RePrompt Agent 1.0
                                     </li>
                                     <li style={{ marginBottom: '16px', display: 'flex', alignItems: 'center' }}>
                                         <span style={{ color: 'var(--md-sys-color-primary)', marginRight: '16px', fontSize: '18px' }}>✓</span> Unlimited Agents
