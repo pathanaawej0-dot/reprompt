@@ -110,91 +110,73 @@ export default function FounderPage() {
 
                 {/* CONTACT SECTION */}
                 <section style={{ marginBottom: '80px' }}>
-                    <h2 style={{ fontSize: '28px', fontWeight: 600, marginBottom: '32px', textAlign: 'center' }}>Talk to me</h2>
-
-                    <div style={{
-                        backgroundColor: 'rgba(255,255,255,0.02)',
-                        border: '1px solid rgba(255,255,255,0.05)',
-                        borderRadius: '32px',
-                        padding: '40px',
-                        marginBottom: '32px'
-                    }}>
-                        <form style={{ display: 'flex', flexDirection: 'column', gap: '20px' }} onSubmit={(e) => {
-                            e.preventDefault();
-                            const formData = new FormData(e.currentTarget);
-                            const name = formData.get('name');
-                            const message = formData.get('message');
-                            window.location.href = `mailto:pathanaawej0@gmail.com?subject=Message from ${name}&body=${message}`;
-                        }}>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                    <label style={{ fontSize: '14px', opacity: 0.6, marginLeft: '4px' }}>Your Name</label>
-                                    <input name="name" required style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px 16px', color: '#fff', outline: 'none' }} placeholder="John Doe" />
-                                </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                    <label style={{ fontSize: '14px', opacity: 0.6, marginLeft: '4px' }}>Your Email (Optional)</label>
-                                    <input name="email" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px 16px', color: '#fff', outline: 'none' }} placeholder="john@example.com" />
-                                </div>
-                            </div>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                <label style={{ fontSize: '14px', opacity: 0.6, marginLeft: '4px' }}>What's on your mind?</label>
-                                <textarea name="message" required rows={4} style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px 16px', color: '#fff', outline: 'none', resize: 'none' }} placeholder="Hey Aawej, I love the app but..." />
-                            </div>
-                            <button type="submit" style={{
-                                backgroundColor: 'var(--md-sys-color-primary)',
-                                color: '#000',
-                                border: 'none',
-                                borderRadius: '16px',
-                                padding: '16px',
-                                fontWeight: 600,
-                                cursor: 'pointer',
-                                transition: 'all 0.2s ease'
-                            }} className="hover-lift">
-                                Send Message (Opens Email)
-                            </button>
-                        </form>
-                    </div>
+                    <h2 style={{ fontSize: '28px', fontWeight: 600, marginBottom: '32px', textAlign: 'center' }}>Let's talk</h2>
 
                     <div style={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-                        gap: '16px'
+                        gap: '20px'
                     }}>
+                        <a href="mailto:pathanaawej0@gmail.com" style={{
+                            textDecoration: 'none',
+                            color: '#fff',
+                            backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                            padding: '32px 24px',
+                            borderRadius: '32px',
+                            border: '1px solid rgba(255, 255, 255, 0.05)',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                            gap: '16px',
+                            transition: 'all 0.2s ease'
+                        }} className="hover-lift">
+                            <Mail style={{ color: 'var(--md-sys-color-primary)' }} size={32} />
+                            <div>
+                                <span style={{ fontWeight: 600, display: 'block', fontSize: '18px' }}>Email Me Directly</span>
+                                <span style={{ fontSize: '14px', opacity: 0.6 }}>pathanaawej0@gmail.com</span>
+                            </div>
+                        </a>
+
                         <a href="https://wa.me/919822304077" target="_blank" rel="noopener noreferrer" style={{
                             textDecoration: 'none',
                             color: '#fff',
                             backgroundColor: 'rgba(37, 211, 102, 0.05)',
-                            padding: '24px',
-                            borderRadius: '24px',
+                            padding: '32px 24px',
+                            borderRadius: '32px',
                             border: '1px solid rgba(37, 211, 102, 0.2)',
                             display: 'flex',
+                            flexDirection: 'column',
                             alignItems: 'center',
+                            textAlign: 'center',
                             gap: '16px',
                             transition: 'all 0.2s ease'
                         }} className="hover-lift">
-                            <MessageSquare style={{ color: '#25D366' }} />
+                            <MessageSquare style={{ color: '#25D366' }} size={32} />
                             <div>
-                                <span style={{ fontWeight: 600, display: 'block' }}>WhatsApp Support</span>
-                                <span style={{ fontSize: '12px', opacity: 0.6 }}>+91 9822304077 (WhatsApp ONLY)</span>
+                                <span style={{ fontWeight: 600, display: 'block', fontSize: '18px' }}>WhatsApp Support</span>
+                                <span style={{ fontSize: '14px', opacity: 0.6 }}>+91 9822304077 (WhatsApp ONLY)</span>
                             </div>
                         </a>
 
                         <a href="https://meet.google.com/new" target="_blank" rel="noopener noreferrer" style={{
                             textDecoration: 'none',
                             color: '#fff',
-                            backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                            padding: '24px',
-                            borderRadius: '24px',
+                            backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                            padding: '32px 24px',
+                            borderRadius: '32px',
                             border: '1px solid rgba(255, 255, 255, 0.05)',
                             display: 'flex',
+                            flexDirection: 'column',
                             alignItems: 'center',
+                            textAlign: 'center',
                             gap: '16px',
                             transition: 'all 0.2s ease'
                         }} className="hover-lift">
-                            <Calendar style={{ color: 'var(--md-sys-color-primary)' }} />
+                            <Calendar style={{ color: 'var(--md-sys-color-primary)' }} size={32} />
                             <div>
-                                <span style={{ fontWeight: 600, display: 'block' }}>Google Meet Call</span>
-                                <span style={{ fontSize: '12px', opacity: 0.6 }}>Weekends (Satara Time)</span>
+                                <span style={{ fontWeight: 600, display: 'block', fontSize: '18px' }}>Google Meet Call</span>
+                                <span style={{ fontSize: '14px', opacity: 0.6 }}>Weekends (Satara Time)</span>
                             </div>
                         </a>
                     </div>
