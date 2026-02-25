@@ -166,6 +166,21 @@ export default function Pricing() {
                 <p style={{ textAlign: 'center', marginTop: '64px', opacity: 0.4, fontSize: '14px' }}>
                     Secure payments powered by Dodo Payments. Cancel anytime.
                 </p>
+
+                <div style={{ textAlign: 'center', marginTop: '48px', padding: '48px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                    <p style={{ opacity: 0.6, marginBottom: '24px' }}>Ready to optimize your workflow on Desktop?</p>
+                    <a href="/reprompt.exe" download className="md-btn md-btn-tonal" style={{
+                        padding: '16px 48px',
+                        fontSize: '18px',
+                        borderRadius: '100px',
+                        textDecoration: 'none',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px'
+                    }}>
+                        Download RePrompt for Windows
+                    </a>
+                </div>
             </div>
         </div>
     );

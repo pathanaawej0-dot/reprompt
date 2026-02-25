@@ -526,3 +526,46 @@ body {
     text-align: left;
   }
 }
+
+.agent-item-disabled {
+  opacity: 0.5 !important;
+  filter: grayscale(0.5);
+  transition: all 0.3s ease;
+}
+
+.sys-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 32px;
+  background-color: var(--md-sys-color-surface-container-high);
+  border: 2px solid var(--md-sys-color-outline);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.sys-switch::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  background-color: var(--md-sys-color-outline);
+  border-radius: 50%;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.sys-switch.active {
+  background-color: var(--md-sys-color-primary);
+  border-color: var(--md-sys-color-primary);
+}
+
+.sys-switch.active::after {
+  left: 24px;
+  background-color: var(--md-sys-color-on-primary);
+  width: 24px;
+  height: 24px;
+  top: 2px;
+}

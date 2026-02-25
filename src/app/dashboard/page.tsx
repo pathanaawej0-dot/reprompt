@@ -115,8 +115,16 @@ export default function DashboardPage() {
     };
 
     const saveAgent = async () => {
-        if (!formData.name || !formData.shortcutKey || !formData.systemPrompt) {
-            alert('Error: Required fields missing.');
+        const shortcutKey = formData.shortcutKey.toUpperCase();
+
+        // Client-side duplicate check (Case-insensitive)
+        const duplicateAgent = agents.find(a =>
+            a.shortcut_key?.toUpperCase() === shortcutKey &&
+            a.id !== currentEditingAgentId
+        );
+
+        if (duplicateAgent) {
+            alert(`Shortcut 'Alt+Shift+${shortcutKey}' is already in use by agent "${duplicateAgent.name}".`);
             return;
         }
 
@@ -124,22 +132,30 @@ export default function DashboardPage() {
             id: currentEditingAgentId || crypto.randomUUID(),
             name: formData.name.toUpperCase(),
             icon: formData.icon,
-            shortcut: `Alt+Shift+${formData.shortcutKey.toUpperCase()}`,
-            shortcut_key: formData.shortcutKey.toUpperCase(),
+            shortcut: `Alt+Shift+${shortcutKey}`,
+            shortcut_key: shortcutKey,
             system_prompt: formData.systemPrompt,
             enabled: true
         };
 
         try {
-            await fetch('/api/agents', {
+            const res = await fetch('/api/agents', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                alert(`Error: ${errorData.error || 'Failed to save agent'}`);
+                return;
+            }
+
             setIsModalOpen(false);
             await fetchUserData(); // Refresh list
         } catch (error) {
             console.error('Failed to process agent node', error);
+            alert('An unexpected error occurred. Please try again.');
         }
     };
 
@@ -150,6 +166,33 @@ export default function DashboardPage() {
             await fetchUserData();
         } catch (error) {
             console.error('Failed to delete agent', error);
+        }
+    };
+
+    const toggleAgent = async (agent: any) => {
+        try {
+            const newEnabledState = !agent.enabled;
+            // Optimistic UI
+            setAgents(prev => prev.map(a => a.id === agent.id ? { ...a, enabled: newEnabledState } : a));
+
+            const res = await fetch('/api/agents', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ...agent,
+                    enabled: newEnabledState
+                })
+            });
+
+            if (!res.ok) {
+                // Revert on failure
+                fetchUserData();
+                const data = await res.json();
+                alert(`Failed to toggle agent: ${data.error}`);
+            }
+        } catch (error) {
+            console.error('Failed to toggle agent', error);
+            fetchUserData();
         }
     };
 
@@ -321,7 +364,7 @@ export default function DashboardPage() {
 
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
                                     {agents.map((agent, index) => (
-                                        <div key={agent.id} style={{
+                                        <div key={agent.id} className={agent.enabled ? '' : 'agent-item-disabled'} style={{
                                             display: 'flex', alignItems: 'center', padding: '24px 0',
                                             borderBottom: index !== agents.length - 1 ? '1px solid var(--md-sys-color-outline-variant)' : 'none'
                                         }}>
@@ -329,17 +372,26 @@ export default function DashboardPage() {
                                                 {agent.icon || '🤖'}
                                             </div>
                                             <div style={{ flexGrow: 1 }}>
-                                                <h3 className="sys-title" style={{ fontSize: '20px', marginBottom: '8px' }}>
-                                                    {agent.name}
-                                                    {agent.is_built_in && <span className="md-chip" style={{ marginLeft: '16px' }}>Built-in</span>}
-                                                </h3>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                                                    <h3 className="sys-title" style={{ fontSize: '20px', marginBottom: '8px' }}>
+                                                        {agent.name}
+                                                    </h3>
+                                                    {agent.is_built_in && <span className="md-chip">Built-in</span>}
+                                                </div>
                                                 <p style={{ color: 'var(--md-sys-color-primary)', fontSize: '13px', fontWeight: 500 }}>Shortcut: <kbd style={{ background: 'var(--md-sys-color-surface-container-high)', color: 'var(--md-sys-color-on-background)', padding: '4px 8px', borderRadius: '4px', fontFamily: 'var(--font-body)' }}>ALT+SHIFT+{agent.shortcut_key}</kbd></p>
                                             </div>
-                                            <div style={{ display: 'flex', gap: '12px' }}>
-                                                <button className="md-btn md-btn-tonal" onClick={() => openAgentModal(agent)}>Edit</button>
-                                                {!agent.is_built_in && (
-                                                    <button className="md-btn md-btn-outlined" onClick={() => deleteAgent(agent.id, agent.name)}>Delete</button>
-                                                )}
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+                                                <div
+                                                    className={`sys-switch ${agent.enabled ? 'active' : ''}`}
+                                                    onClick={() => toggleAgent(agent)}
+                                                    title={agent.enabled ? 'Disable Agent' : 'Enable Agent'}
+                                                />
+                                                <div style={{ display: 'flex', gap: '12px' }}>
+                                                    <button className="md-btn md-btn-tonal" onClick={() => openAgentModal(agent)}>Edit</button>
+                                                    {!agent.is_built_in && (
+                                                        <button className="md-btn md-btn-outlined" onClick={() => deleteAgent(agent.id, agent.name)}>Delete</button>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
                                     ))}

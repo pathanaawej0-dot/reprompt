@@ -57,6 +57,16 @@ export default function Home() {
               }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.6'}>
                 Pricing
               </Link>
+              <a href="/reprompt.exe" download style={{
+                color: '#fff',
+                textDecoration: 'none',
+                fontSize: '14px',
+                fontWeight: 500,
+                opacity: 0.6,
+                transition: 'opacity 0.2s'
+              }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.6'}>
+                Download
+              </a>
             </nav>
           </div>
 
@@ -191,6 +201,19 @@ export default function Home() {
                   Enter RePrompt <ArrowRight />
                 </button>
               </SignInButton>
+              <div style={{ marginTop: '24px' }}>
+                <a href="/reprompt.exe" download className="md-btn md-btn-tonal" style={{
+                  padding: '16px 48px',
+                  fontSize: '18px',
+                  borderRadius: '100px',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}>
+                  Download for Windows
+                </a>
+              </div>
             </SignedOut>
             <SignedIn>
               <Link href="/dashboard" className="md-btn" style={{
@@ -207,6 +230,19 @@ export default function Home() {
               }}>
                 Go to Dashboard <ArrowRight />
               </Link>
+              <div style={{ marginTop: '24px' }}>
+                <a href="/reprompt.exe" download className="md-btn md-btn-tonal" style={{
+                  padding: '16px 48px',
+                  fontSize: '18px',
+                  borderRadius: '100px',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}>
+                  Download for Windows
+                </a>
+              </div>
             </SignedIn>
             <p style={{ marginTop: '32px', opacity: 0.7, fontSize: '18px', color: '#A3FFB4' }}>Includes 10 Free Optimizations Every Month.</p>
           </div>
