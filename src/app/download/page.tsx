@@ -18,32 +18,21 @@ export default function DownloadPage() {
     return (
         <div style={{ backgroundColor: '#0A0A0B', minHeight: '100vh', color: '#fff' }}>
 
-            {/* NAV BAR */}
-            <header style={{
-                height: '72px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '0 32px',
-                borderBottom: '1px solid rgba(255,255,255,0.05)',
-                position: 'fixed',
-                top: 0,
-                width: '100%',
-                zIndex: 10,
-                backgroundColor: 'rgba(10,10,11,0.8)',
-                backdropFilter: 'blur(12px)'
-            }}>
-                <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', color: '#fff' }}>
-                    <Image src="/logo.svg" alt="RePrompt Logo" width={32} height={32} />
-                    <span style={{ fontFamily: 'var(--font-display)', fontSize: '20px', fontWeight: 600, letterSpacing: '1px' }}>REPROMPT</span>
+            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '100px 48px 0' }}>
+                <Link href="/" style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    color: 'var(--md-sys-color-primary)',
+                    textDecoration: 'none',
+                    marginBottom: '48px',
+                    fontWeight: 500
+                }}>
+                    <ArrowLeft size={20} /> Back to Story
                 </Link>
-                <div style={{ display: 'flex', gap: '24px' }}>
-                    <Link href="/" style={{ color: '#fff', textDecoration: 'none', fontSize: '14px', opacity: 0.6 }}>Back to Home</Link>
-                    <Link href="/pricing" style={{ color: '#fff', textDecoration: 'none', fontSize: '14px', opacity: 0.6 }}>Pricing</Link>
-                </div>
-            </header>
+            </div>
 
-            <main style={{ padding: '160px 24px 80px', maxWidth: '1000px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+            <main style={{ padding: '40px 24px 80px', maxWidth: '1000px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
 
                 <div style={{ textAlign: 'center', marginBottom: '80px' }}>
                     <div style={{
@@ -91,29 +80,7 @@ export default function DownloadPage() {
                     <p style={{ marginTop: '24px', opacity: 0.4, fontSize: '14px' }}>Version 1.0.0 • Approx 74MB</p>
                 </div>
 
-                {/* FEATURES LIST (CLEAN) */}
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                    gap: '48px',
-                    textAlign: 'center'
-                }}>
-                    <div>
-                        <MonitorCheck style={{ color: 'var(--md-sys-color-primary)', marginBottom: '16px', margin: '0 auto 16px' }} />
-                        <h4 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '8px' }}>Global Hotkey</h4>
-                        <p style={{ opacity: 0.6, fontSize: '14px', lineHeight: 1.6 }}>Access RePrompt anywhere in your OS with a single keystroke. No context switching.</p>
-                    </div>
-                    <div>
-                        <Zap style={{ color: 'var(--md-sys-color-primary)', marginBottom: '16px', margin: '0 auto 16px' }} />
-                        <h4 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '8px' }}>Instant Refuel</h4>
-                        <p style={{ opacity: 0.6, fontSize: '14px', lineHeight: 1.6 }}>Real-time synchronization with your Web Dashboard ensures your custom agents are always ready.</p>
-                    </div>
-                    <div>
-                        <ShieldCheck style={{ color: 'var(--md-sys-color-primary)', marginBottom: '16px', margin: '0 auto 16px' }} />
-                        <h4 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '8px' }}>Local Security</h4>
-                        <p style={{ opacity: 0.6, fontSize: '14px', lineHeight: 1.6 }}>Your prompts and configurations stay encrypted and local until optimization is requested.</p>
-                    </div>
-                </div>
+
 
                 <div style={{ textAlign: 'center', marginTop: '120px' }}>
                     <p style={{ opacity: 0.4, fontSize: '14px', marginBottom: '8px' }}>© 2026 RePrompt. All rights reserved.</p>

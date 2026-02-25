@@ -120,7 +120,7 @@ export default function Pricing() {
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '32px' }}>
-                            <span style={{ fontSize: '56px', fontWeight: 600 }}>$19.99</span>
+                            <span style={{ fontSize: '56px', fontWeight: 600 }}>$15</span>
                             <span style={{ opacity: 0.4 }}>/month</span>
                         </div>
 
