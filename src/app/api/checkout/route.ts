@@ -5,7 +5,7 @@ import DodoPayments from 'dodopayments';
 
 const client = new DodoPayments({
     bearerToken: process.env.DODO_PAYMENTS_API_KEY,
-    environment: 'test_mode'
+    environment: (process.env.DODO_ENVIRONMENT as any) || 'test_mode'
 });
 
 export async function POST(req: Request) {
@@ -15,6 +15,8 @@ export async function POST(req: Request) {
 
         const user = await currentUser();
         if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 });
+
+        const origin = req.headers.get('origin') || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 
         const session = await client.checkoutSessions.create({
             product_cart: [
@@ -27,7 +29,7 @@ export async function POST(req: Request) {
                 email: user.emailAddresses[0].emailAddress,
                 name: user.fullName || user.firstName || 'Customer'
             },
-            return_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?checkout=success`,
+            return_url: `${origin}/dashboard?checkout=success`,
             metadata: {
                 userId: userId
             }

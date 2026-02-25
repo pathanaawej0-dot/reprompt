@@ -57,7 +57,7 @@ export async function POST(req: Request) {
         try {
             await sql`
             INSERT INTO users (id, email, credits, plan, credits_reset_date) 
-            VALUES (${id}, ${email}, 100, 'free', NOW())
+            VALUES (${id}, ${email}, 10, 'free', NOW())
             ON CONFLICT (id) DO NOTHING
         `;
             console.log(`User ${id} created in Neon DB`);

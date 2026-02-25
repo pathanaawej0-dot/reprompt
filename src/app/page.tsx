@@ -40,14 +40,14 @@ export default function Home() {
 
         <div>
           <SignedOut>
-            <Link href="/sign-up">
+            <SignInButton mode="modal">
               <button className="md-btn md-btn-filled" style={{ padding: '10px 24px' }}>Get Started</button>
-            </Link>
+            </SignInButton>
           </SignedOut>
           <SignedIn>
             <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
               <Link href="/dashboard" className="md-btn md-btn-tonal" style={{ textDecoration: 'none' }}>
-                Open Terminal
+                Dashboard
               </Link>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <UserButton afterSignOutUrl="/" />
@@ -106,7 +106,7 @@ export default function Home() {
               <SignedOut>
                 <SignInButton mode="modal">
                   <button className="md-btn md-btn-filled" style={{ padding: '20px 48px', fontSize: '18px' }}>
-                    Commence Trial
+                    Get Started
                   </button>
                 </SignInButton>
               </SignedOut>
@@ -115,7 +115,7 @@ export default function Home() {
                   Download App
                 </a>
                 <Link href="/dashboard" className="md-btn md-btn-outlined" style={{ padding: '20px 48px', fontSize: '18px' }}>
-                  Open Terminal
+                  Dashboard
                 </Link>
               </SignedIn>
             </div>

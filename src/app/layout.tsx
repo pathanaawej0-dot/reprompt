@@ -6,6 +6,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "RePrompt | Professional Prompt Engineering",
   description: "Transform rough thoughts into professional prompts instantly. Built by a 16-year-old builder.",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({
