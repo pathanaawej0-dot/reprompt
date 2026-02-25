@@ -57,7 +57,7 @@ export default function Home() {
               }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.6'}>
                 Pricing
               </Link>
-              <a href="/reprompt.exe" download style={{
+              <Link href="/download" style={{
                 color: '#fff',
                 textDecoration: 'none',
                 fontSize: '14px',
@@ -66,7 +66,7 @@ export default function Home() {
                 transition: 'opacity 0.2s'
               }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.6'}>
                 Download
-              </a>
+              </Link>
             </nav>
           </div>
 
@@ -202,7 +202,7 @@ export default function Home() {
                 </button>
               </SignInButton>
               <div style={{ marginTop: '24px' }}>
-                <a href="/reprompt.exe" download className="md-btn md-btn-tonal" style={{
+                <Link href="/download" className="md-btn md-btn-tonal" style={{
                   padding: '16px 48px',
                   fontSize: '18px',
                   borderRadius: '100px',
@@ -212,7 +212,7 @@ export default function Home() {
                   gap: '8px'
                 }}>
                   Download for Windows
-                </a>
+                </Link>
               </div>
             </SignedOut>
             <SignedIn>
@@ -231,7 +231,7 @@ export default function Home() {
                 Go to Dashboard <ArrowRight />
               </Link>
               <div style={{ marginTop: '24px' }}>
-                <a href="/reprompt.exe" download className="md-btn md-btn-tonal" style={{
+                <Link href="/download" className="md-btn md-btn-tonal" style={{
                   padding: '16px 48px',
                   fontSize: '18px',
                   borderRadius: '100px',
@@ -241,7 +241,7 @@ export default function Home() {
                   gap: '8px'
                 }}>
                   Download for Windows
-                </a>
+                </Link>
               </div>
             </SignedIn>
             <p style={{ marginTop: '32px', opacity: 0.7, fontSize: '18px', color: '#A3FFB4' }}>Includes 10 Free Optimizations Every Month.</p>

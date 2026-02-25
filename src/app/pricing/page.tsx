@@ -169,7 +169,7 @@ export default function Pricing() {
 
                 <div style={{ textAlign: 'center', marginTop: '48px', padding: '48px', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
                     <p style={{ opacity: 0.6, marginBottom: '24px' }}>Ready to optimize your workflow on Desktop?</p>
-                    <a href="/reprompt.exe" download className="md-btn md-btn-tonal" style={{
+                    <Link href="/download" className="md-btn md-btn-tonal" style={{
                         padding: '16px 48px',
                         fontSize: '18px',
                         borderRadius: '100px',
@@ -179,7 +179,7 @@ export default function Pricing() {
                         gap: '8px'
                     }}>
                         Download RePrompt for Windows
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
