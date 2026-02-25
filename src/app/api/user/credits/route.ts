@@ -16,7 +16,7 @@ export async function GET(req: Request) {
 
         if (users.length === 0) {
             // If user doesn't exist yet (webhook delay), return default
-            return NextResponse.json({ credits: 100 }, { status: 200 });
+            return NextResponse.json({ credits: 10 }, { status: 200 });
         }
 
         return NextResponse.json({
