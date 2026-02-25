@@ -340,7 +340,7 @@ export default function DashboardPage() {
                                     RePrompt works best as an invisible background utility. Install our desktop client to enable zero-friction, cross-app text accelerators tied directly to your keyboard.
                                 </p>
                                 <div style={{ display: 'flex', gap: '16px' }}>
-                                    <a href="/RePrompt-Setup-1.0.0.exe" download className="md-btn md-btn-tonal">Download for Windows</a>
+                                    <Link href="/download" className="md-btn md-btn-tonal">Download for Windows</Link>
                                 </div>
                             </div>
                         </div>
