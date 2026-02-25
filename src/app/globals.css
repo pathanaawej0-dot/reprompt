@@ -442,13 +442,15 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   background: transparent;
   position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   top: 0;
+  transform: none;
   z-index: 100;
 }
 
 .nav-header.scrolled {
+  left: 50%;
+  transform: translateX(-50%);
   width: 90%;
   max-width: 1000px;
   margin: 20px auto;
