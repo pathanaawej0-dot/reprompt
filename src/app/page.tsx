@@ -67,6 +67,16 @@ export default function Home() {
               }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.6'}>
                 Download
               </Link>
+              <Link href="/founder" style={{
+                color: '#fff',
+                textDecoration: 'none',
+                fontSize: '14px',
+                fontWeight: 500,
+                opacity: 0.6,
+                transition: 'opacity 0.2s'
+              }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.6'}>
+                Founder
+              </Link>
             </nav>
           </div>
 
@@ -248,8 +258,75 @@ export default function Home() {
           </div>
         </section>
 
+        {/* TRUST NOTE FOOTER */}
+        <section style={{ padding: '80px 24px', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+          <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+            <Link href="/founder" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div style={{
+                padding: '32px',
+                borderRadius: '32px',
+                backgroundColor: 'rgba(255,255,255,0.02)',
+                border: '1px solid rgba(255,255,255,0.05)',
+                transition: 'all 0.3s ease',
+                cursor: 'pointer'
+              }} className="hover-glow">
+                <Heart style={{ color: '#ec4899', marginBottom: '16px' }} />
+                <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '8px' }}>A message from Aawej</h3>
+                <p style={{ opacity: 0.6, fontSize: '15px', lineHeight: 1.6 }}>
+                  "I don't have a giant team or a custom domain yet. I'm just a student from Satara with a vision for better AI tools. Click to read my story."
+                </p>
+                <div style={{ marginTop: '16px', color: 'var(--md-sys-color-primary)', fontSize: '14px', fontWeight: 500 }}>
+                  Read the Founder's Story →
+                </div>
+              </div>
+            </Link>
+          </div>
+        </section>
+
       </main>
 
+      <style jsx global>{`
+        .nav-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+          transition: all 0.6s cubic-bezier(0.2, 0, 0, 1);
+        }
+        .nav-header.scrolled {
+          background-color: rgba(10, 10, 11, 0.8);
+          backdrop-filter: blur(20px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .stack-container {
+          position: relative;
+        }
+        .stack-section {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 80px 24px;
+          position: sticky;
+          top: 0;
+          overflow: hidden;
+        }
+        .bg-deep { background-color: #0A0A0B; }
+        .bg-darker { background-color: #050506; }
+        .sys-headline-xl { font-family: var(--font-display); }
+        .content-wrapper {
+          max-width: 1200px;
+          width: 100%;
+          position: relative;
+          z-index: 2;
+        }
+        .hover-glow:hover {
+          background-color: rgba(255,255,255,0.04);
+          border-color: rgba(99, 102, 241, 0.3);
+          transform: translateY(-4px);
+        }
+      `}</style>
     </div>
   );
 }
