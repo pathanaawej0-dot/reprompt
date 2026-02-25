@@ -149,6 +149,7 @@ export default function DashboardPage() {
                 const errorData = await res.json();
                 alert(`Error: ${errorData.error || 'Failed to save agent'}`);
                 return;
+                return;
             }
 
             setIsModalOpen(false);

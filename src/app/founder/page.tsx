@@ -61,90 +61,143 @@ export default function FounderPage() {
                     </p>
 
                     <p style={{ marginBottom: '24px' }}>
-                        I don't have a big office, a venture capital check, or even a professional domain name yet. What I do have is a PC, an internet connection, and a burning desire to build something that actually helps people.
+                        I noticed a big problem: people are paying for "prompt engineering" tools that only work in a browser. You have to constanty copy-paste your prompts, waste time finding the best one in a library, and then manually edit it. It's a broken workflow.
+                    </p>
+
+                    <p style={{ marginBottom: '24px', color: 'var(--md-sys-color-primary)', fontWeight: 500 }}>
+                        I built RePrompt to change that. No more copy-pasting. Just write your raw, messy thoughts anywhere you need—in any app—and press one key. RePrompt Agent 1.0 does the heavy lifting instantly.
                     </p>
 
                     <div style={{
-                        backgroundColor: 'rgba(255,255,255,0.03)',
-                        border: '1px solid rgba(255,255,255,0.05)',
+                        backgroundColor: 'rgba(255,244,199,0.05)',
+                        border: '1px solid rgba(255,244,199,0.2)',
                         borderRadius: '24px',
                         padding: '32px',
                         marginBottom: '40px',
                         marginTop: '40px'
                     }}>
                         <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                            <ShieldCheck style={{ color: 'var(--md-sys-color-primary)' }} />
-                            Radical Transparency
+                            <ShieldCheck style={{ color: '#fbbf24' }} />
+                            A Note on Safety & Warnings
                         </h3>
                         <p style={{ fontSize: '15px', opacity: 0.7, marginBottom: '16px' }}>
-                            You might notice our URL ends in <code>.vercel.app</code> and that our login screen says <strong>"Development Mode"</strong>. Here is the honest truth:
+                            Because I'm building this from my bedroom without a giant budget, you might encounter two specific warnings. I want to be 100% honest about why:
                         </p>
-                        <ul style={{ fontSize: '15px', opacity: 0.7, display: 'flex', flexDirection: 'column', gap: '8px', paddingLeft: '20px' }}>
-                            <li>I currently cannot afford the $15-20 required for a professional <code>.com</code> or <code>.ai</code> domain.</li>
-                            <li>Clerk (our secure auth provider) requires a custom domain to enable "Production Mode."</li>
-                            <li>Because of this, you see a warning—but the security is exactly the same as a multi-million dollar app.</li>
-                        </ul>
-                        <p style={{ fontSize: '15px', opacity: 0.7, marginTop: '16px', fontWeight: 500, color: 'var(--md-sys-color-primary)' }}>
-                            Every single "Pro" subscription directly funds the purchase of our professional domain and code-signing certificates.
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                            <div>
+                                <strong style={{ color: '#fff', fontSize: '14px', display: 'block', marginBottom: '4px' }}>1. Windows "Protected your PC"</strong>
+                                <p style={{ fontSize: '14px', opacity: 0.6 }}>Microsoft requires a $400/year "EV Certificate" to remove this warning. As a student, I'm saving up for this. The app is safe, verified, and open-source.</p>
+                            </div>
+                            <div>
+                                <strong style={{ color: '#fff', fontSize: '14px', display: 'block', marginBottom: '4px' }}>2. Clerk "Development Mode"</strong>
+                                <p style={{ fontSize: '14px', opacity: 0.6 }}>Our authentication provider requires a custom domain (like <code>reprompt.ai</code>) to go live. I currently built this on a <code>.vercel.app</code> domain to save on costs.</p>
+                            </div>
+                        </div>
+                        <p style={{ fontSize: '14px', opacity: 0.8, marginTop: '20px', fontStyle: 'italic', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '16px' }}>
+                            Your Pro subscriptions go 100% toward fixing these "beginner" hurdles so we can look as professional as we act.
                         </p>
                     </div>
 
                     <p style={{ marginBottom: '24px' }}>
-                        I built RePrompt because I was tired of context-switching between my work and an AI chat tab. I wanted the AI to live where I live—in my code editor, my browser, and my documents.
-                    </p>
-
-                    <p style={{ marginBottom: '24px' }}>
-                        Thank you for taking a chance on a student project. Your trust means everything to me, and I promise to keep building, keep shipping, and keep improving RePrompt until it's the best tool on your desktop.
+                        Thank you for taking a chance on a student project. Your trust means everything to me. I'm building this for you, and I'm always available to listen.
                     </p>
                 </section>
 
                 {/* HEART */}
-                <div style={{ textAlign: 'center', margin: '64px 0' }}>
+                <div style={{ textAlign: 'center', margin: '48px 0 64px' }}>
                     <Heart style={{ color: '#ec4899' }} size={32} />
                 </div>
 
                 {/* CONTACT SECTION */}
-                <section style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                    gap: '24px',
-                    marginTop: '64px'
-                }}>
-                    <a href="mailto:pathanaawej0@gmail.com" style={{
-                        textDecoration: 'none',
-                        color: '#fff',
-                        backgroundColor: 'rgba(255,255,255,0.03)',
-                        padding: '24px',
-                        borderRadius: '20px',
-                        border: '1px solid rgba(255,255,255,0.05)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '12px',
-                        transition: 'all 0.2s ease'
-                    }} className="hover-lift">
-                        <Mail style={{ color: 'var(--md-sys-color-primary)' }} />
-                        <span style={{ fontWeight: 600 }}>Email Me Directly</span>
-                        <span style={{ fontSize: '14px', opacity: 0.6 }}>pathanaawej0@gmail.com</span>
-                        <span style={{ fontSize: '12px', color: 'var(--md-sys-color-primary)' }}>Expected reply: &lt; 24hrs</span>
-                    </a>
+                <section style={{ marginBottom: '80px' }}>
+                    <h2 style={{ fontSize: '28px', fontWeight: 600, marginBottom: '32px', textAlign: 'center' }}>Talk to me</h2>
 
-                    <a href="https://meet.google.com/new" target="_blank" rel="noopener noreferrer" style={{
-                        textDecoration: 'none',
-                        color: '#fff',
-                        backgroundColor: 'rgba(255,255,255,0.03)',
-                        padding: '24px',
-                        borderRadius: '20px',
+                    <div style={{
+                        backgroundColor: 'rgba(255,255,255,0.02)',
                         border: '1px solid rgba(255,255,255,0.05)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '12px',
-                        transition: 'all 0.2s ease'
-                    }} className="hover-lift">
-                        <Calendar style={{ color: 'var(--md-sys-color-primary)' }} />
-                        <span style={{ fontWeight: 600 }}>Request a Meet</span>
-                        <span style={{ fontSize: '14px', opacity: 0.6 }}>Stuck? Let's fix it on a call.</span>
-                        <span style={{ fontSize: '12px', color: 'var(--md-sys-color-primary)' }}>Available on weekends</span>
-                    </a>
+                        borderRadius: '32px',
+                        padding: '40px',
+                        marginBottom: '32px'
+                    }}>
+                        <form style={{ display: 'flex', flexDirection: 'column', gap: '20px' }} onSubmit={(e) => {
+                            e.preventDefault();
+                            const formData = new FormData(e.currentTarget);
+                            const name = formData.get('name');
+                            const message = formData.get('message');
+                            window.location.href = `mailto:pathanaawej0@gmail.com?subject=Message from ${name}&body=${message}`;
+                        }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                    <label style={{ fontSize: '14px', opacity: 0.6, marginLeft: '4px' }}>Your Name</label>
+                                    <input name="name" required style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px 16px', color: '#fff', outline: 'none' }} placeholder="John Doe" />
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                    <label style={{ fontSize: '14px', opacity: 0.6, marginLeft: '4px' }}>Your Email (Optional)</label>
+                                    <input name="email" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px 16px', color: '#fff', outline: 'none' }} placeholder="john@example.com" />
+                                </div>
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                <label style={{ fontSize: '14px', opacity: 0.6, marginLeft: '4px' }}>What's on your mind?</label>
+                                <textarea name="message" required rows={4} style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '12px 16px', color: '#fff', outline: 'none', resize: 'none' }} placeholder="Hey Aawej, I love the app but..." />
+                            </div>
+                            <button type="submit" style={{
+                                backgroundColor: 'var(--md-sys-color-primary)',
+                                color: '#000',
+                                border: 'none',
+                                borderRadius: '16px',
+                                padding: '16px',
+                                fontWeight: 600,
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease'
+                            }} className="hover-lift">
+                                Send Message (Opens Email)
+                            </button>
+                        </form>
+                    </div>
+
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                        gap: '16px'
+                    }}>
+                        <a href="https://wa.me/919822304077" target="_blank" rel="noopener noreferrer" style={{
+                            textDecoration: 'none',
+                            color: '#fff',
+                            backgroundColor: 'rgba(37, 211, 102, 0.05)',
+                            padding: '24px',
+                            borderRadius: '24px',
+                            border: '1px solid rgba(37, 211, 102, 0.2)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '16px',
+                            transition: 'all 0.2s ease'
+                        }} className="hover-lift">
+                            <MessageSquare style={{ color: '#25D366' }} />
+                            <div>
+                                <span style={{ fontWeight: 600, display: 'block' }}>WhatsApp Support</span>
+                                <span style={{ fontSize: '12px', opacity: 0.6 }}>+91 9822304077 (WhatsApp ONLY)</span>
+                            </div>
+                        </a>
+
+                        <a href="https://meet.google.com/new" target="_blank" rel="noopener noreferrer" style={{
+                            textDecoration: 'none',
+                            color: '#fff',
+                            backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                            padding: '24px',
+                            borderRadius: '24px',
+                            border: '1px solid rgba(255, 255, 255, 0.05)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '16px',
+                            transition: 'all 0.2s ease'
+                        }} className="hover-lift">
+                            <Calendar style={{ color: 'var(--md-sys-color-primary)' }} />
+                            <div>
+                                <span style={{ fontWeight: 600, display: 'block' }}>Google Meet Call</span>
+                                <span style={{ fontSize: '12px', opacity: 0.6 }}>Weekends (Satara Time)</span>
+                            </div>
+                        </a>
+                    </div>
                 </section>
 
                 {/* FOOTER NOTE */}
