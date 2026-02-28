@@ -1,27 +1,33 @@
 import { NextResponse } from 'next/server';
 import { getVerifiedUserId } from '@/lib/authHelper';
+import { getCorsHeaders, handleCorsOptions } from '@/lib/corsHelper';
 import { sql } from '@/lib/db';
 import Groq from 'groq-sdk';
+
+export async function OPTIONS(req: Request) {
+    return handleCorsOptions(req);
+}
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export async function POST(req: Request) {
+    const corsHeaders = getCorsHeaders(req);
     try {
         const userId = await getVerifiedUserId(req);
-        if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: corsHeaders });
 
         const idempotencyKey = req.headers.get('idempotency-key');
 
         if (idempotencyKey) {
             const cachedResult = await sql`SELECT response FROM idempotency_cache WHERE idempotency_key = ${idempotencyKey}`;
             if (cachedResult.length > 0) {
-                return NextResponse.json({ optimizedText: cachedResult[0].response, credits: undefined, cached: true });
+                return NextResponse.json({ optimizedText: cachedResult[0].response, credits: undefined, cached: true }, { headers: corsHeaders });
             }
         }
 
         const body = await req.json();
         const { text, agentPrompt, agentId } = body;
-        if (!text) return NextResponse.json({ error: 'Text is required' }, { status: 400 });
+        if (!text) return NextResponse.json({ error: 'Text is required' }, { status: 400, headers: corsHeaders });
 
         let systemPrompt = agentPrompt || 'You are a professional text optimizer.';
         if (!agentPrompt && agentId) {
@@ -50,7 +56,7 @@ export async function POST(req: Request) {
         `;
 
         if (deductionResult.length === 0) {
-            return NextResponse.json({ error: 'Insufficient credits' }, { status: 402 });
+            return NextResponse.json({ error: 'Insufficient credits' }, { status: 402, headers: corsHeaders });
         }
 
         const remainingCredits = deductionResult[0].credits;
@@ -87,9 +93,9 @@ export async function POST(req: Request) {
             `;
         }
 
-        return NextResponse.json({ optimizedText, credits: remainingCredits, cached: false });
+        return NextResponse.json({ optimizedText, credits: remainingCredits, cached: false }, { headers: corsHeaders });
     } catch (error: any) {
         console.error('Optimization error:', error);
-        return NextResponse.json({ error: 'Internal Server Error', details: error?.message || String(error) }, { status: 500 });
+        return NextResponse.json({ error: 'Internal Server Error', details: error?.message || String(error) }, { status: 500, headers: corsHeaders });
     }
 }
