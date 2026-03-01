@@ -38,7 +38,7 @@ export default function Home() {
               <span style={{ fontFamily: 'var(--font-display)', fontSize: scrolled ? '20px' : '24px', fontWeight: 600, letterSpacing: '1px', transition: 'all 0.6s' }}>REPROMPT</span>
             </div>
             <nav style={{ marginLeft: '16px', display: 'flex', gap: '24px' }}>
-              {[['Pricing', '/pricing'], ['Download', '/download'], ['Founder', '/founder']].map(([label, href]) => (
+              {[['Pricing', '/pricing'], ['Download', '/download'], ['Open Source', '/opensource'], ['Founder', '/founder']].map(([label, href]) => (
                 <Link key={href} href={href} style={{ color: '#fff', textDecoration: 'none', fontSize: '14px', fontWeight: 500, opacity: 0.6, transition: 'opacity 0.2s' }}
                   onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
                   onMouseLeave={(e) => e.currentTarget.style.opacity = '0.6'}>
@@ -269,9 +269,12 @@ export default function Home() {
                   Start Free <ArrowRight />
                 </button>
               </SignInButton>
-              <div style={{ marginTop: '24px' }}>
+              <div style={{ marginTop: '24px', display: 'flex', gap: '16px', justifyContent: 'center' }}>
                 <Link href="/download" className="md-btn md-btn-tonal" style={{ padding: '16px 48px', fontSize: '18px', borderRadius: '100px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   Download for Windows
+                </Link>
+                <Link href="/opensource" className="md-btn md-btn-tonal" style={{ padding: '16px 48px', fontSize: '18px', borderRadius: '100px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', border: '1px solid rgba(255,255,255,0.2)', backgroundColor: 'transparent', color: '#fff' }}>
+                  Open Source Version
                 </Link>
               </div>
             </SignedOut>
@@ -290,9 +293,12 @@ export default function Home() {
               }}>
                 Go to Dashboard <ArrowRight />
               </Link>
-              <div style={{ marginTop: '24px' }}>
+              <div style={{ marginTop: '24px', display: 'flex', gap: '16px', justifyContent: 'center' }}>
                 <Link href="/download" className="md-btn md-btn-tonal" style={{ padding: '16px 48px', fontSize: '18px', borderRadius: '100px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   Download for Windows
+                </Link>
+                <Link href="/opensource" className="md-btn md-btn-tonal" style={{ padding: '16px 48px', fontSize: '18px', borderRadius: '100px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', border: '1px solid rgba(255,255,255,0.2)', backgroundColor: 'transparent', color: '#fff' }}>
+                  Open Source Version
                 </Link>
               </div>
             </SignedIn>

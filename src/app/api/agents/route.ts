@@ -34,7 +34,13 @@ export async function GET(req: Request) {
         const finalAgents = await sql`
             SELECT * FROM agents WHERE user_id = ${userId} ORDER BY created_at DESC
         `;
-        return NextResponse.json({ agents: finalAgents }, { headers: corsHeaders });
+
+        // Fetch User Credits
+        const userRec = await sql`SELECT api_calls_count FROM users WHERE id = ${userId}`;
+        const creditsUsed = userRec[0]?.api_calls_count || 0;
+        const totalCredits = 100; // Assuming 100 max credits for now
+
+        return NextResponse.json({ agents: finalAgents, credits: Math.max(0, totalCredits - creditsUsed) }, { headers: corsHeaders });
     } catch (error: any) {
         console.error('Fetch agents error:', error);
         return NextResponse.json({ error: error?.message || 'Internal Server Error' }, { status: 500, headers: corsHeaders });
