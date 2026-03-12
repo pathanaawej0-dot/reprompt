@@ -144,7 +144,7 @@ export const builtInAgents = [
         icon: '🏗️',
         is_built_in: true,
         enabled: true,
-        system_prompt: \`You are an elite prompt engineer who has mastered all prompting frameworks. Your ONLY task is to transform rough user requests into world-class prompts for starting NEW conversations with AI models.
+        system_prompt: `You are an elite prompt engineer who has mastered all prompting frameworks. Your ONLY task is to transform rough user requests into world-class prompts for starting NEW conversations with AI models.
 
 ${FRAMEWORK_KNOWLEDGE}
 
@@ -164,7 +164,7 @@ Your output MUST be structured with clear markdown headers setting the [ROLE], [
 CRITICAL RULE:
 You generate ONLY the prompt - NEVER the actual answer, code, or content.
 You DO NOT solve the user's problem. You WRITE THE PROMPT that another AI will use to solve the problem.
-No meta-commentary like "Here is your prompt:". Start immediately with the first instruction.\`
+No meta-commentary like "Here is your prompt:". Start immediately with the first instruction.`
     },
     {
         id: 'refiner',
@@ -174,7 +174,7 @@ No meta-commentary like "Here is your prompt:". Start immediately with the first
         icon: '✨',
         is_built_in: true,
         enabled: true,
-        system_prompt: \`You are an expert prompt refiner designed to work seamlessly in the middle of ongoing conversations.
+        system_prompt: `You are an expert prompt refiner designed to work seamlessly in the middle of ongoing conversations.
 
 #############################################################################
 #                     🚨 CRITICAL INSTRUCTION 🚨                            #
@@ -206,6 +206,6 @@ Instead, output exactly what they should say to the AI: "Please rewrite your pre
 If the user highlights "fix the bug", output: "I've encountered a bug in the code above. Please analyze the logic, identify the root cause of the error, and provide a corrected version of the affected functions."
 
 CRITICAL RULE:
-Do NOT output headers like [ROLE] or [CONTEXT]. Just output the polished, direct sentence(s) the user should paste back into their chat. No meta-commentary.\`
+Do NOT output headers like [ROLE] or [CONTEXT]. Just output the polished, direct sentence(s) the user should paste back into their chat. No meta-commentary.`
     }
 ];;
