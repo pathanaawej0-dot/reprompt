@@ -61,7 +61,7 @@ export default function DownloadPage() {
                     marginBottom: '80px'
                 }}>
                     <h3 style={{ fontSize: '24px', fontWeight: 600, marginBottom: '40px' }}>RePrompt for Windows</h3>
-                    <a href="/reprompt.exe" download className="md-btn" style={{
+                    <a href="/RePrompt-Setup-1.1.0.exe" download className="md-btn" style={{
                         padding: '24px 64px',
                         fontSize: '24px',
                         backgroundColor: '#fff',
@@ -77,7 +77,7 @@ export default function DownloadPage() {
                     }}>
                         Download .exe <Download size={24} />
                     </a>
-                    <p style={{ marginTop: '24px', opacity: 0.4, fontSize: '14px' }}>Version 1.0.0 • Approx 74MB</p>
+                    <p style={{ marginTop: '24px', opacity: 0.4, fontSize: '14px' }}>Version 1.1.0 • Approx 74MB</p>
                 </div>
 
 
