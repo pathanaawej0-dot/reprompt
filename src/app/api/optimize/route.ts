@@ -62,17 +62,30 @@ export async function POST(req: Request) {
         const remainingCredits = deductionResult[0].credits;
 
         let optimizedText = '';
+        let explanation = '';
         try {
+            const jsonSystemPrompt = `${systemPrompt}\n\nIMPORTANT: You MUST return your response as a JSON object with two keys: "optimizedText" (the final result) and "explanation" (a single short sentence describing your main changes). Do not include any other text.`;
+            
             const completion = await groq.chat.completions.create({
                 messages: [
-                    { role: 'system', content: systemPrompt },
+                    { role: 'system', content: jsonSystemPrompt },
                     { role: 'user', content: text }
                 ],
                 model: 'llama-3.3-70b-versatile',
+                response_format: { type: 'json_object' },
                 temperature: 0.7,
-                max_tokens: 4096,
+                max_tokens: 4000,
             });
-            optimizedText = completion.choices[0]?.message?.content || '';
+            
+            const raw = completion.choices[0]?.message?.content || '{}';
+            try {
+                const parsed = JSON.parse(raw);
+                optimizedText = parsed.optimizedText || raw;
+                explanation = parsed.explanation || 'Refined for clarity and impact.';
+            } catch {
+                optimizedText = raw;
+                explanation = 'Refined for clarity and impact.';
+            }
 
             await sql`
               INSERT INTO usage_logs (user_id, agent_id, prompt_tokens, completion_tokens)
@@ -93,7 +106,7 @@ export async function POST(req: Request) {
             `;
         }
 
-        return NextResponse.json({ optimizedText, credits: remainingCredits, cached: false }, { headers: corsHeaders });
+        return NextResponse.json({ optimizedText, explanation, credits: remainingCredits, cached: false }, { headers: corsHeaders });
     } catch (error: any) {
         console.error('Optimization error:', error);
         return NextResponse.json({ error: 'Internal Server Error', details: error?.message || String(error) }, { status: 500, headers: corsHeaders });

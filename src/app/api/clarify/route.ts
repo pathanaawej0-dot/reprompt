@@ -11,25 +11,25 @@ const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const CLARIFY_SYSTEM_PROMPT = `You are an expert at analyzing vague user prompts and identifying what information is needed to write a great optimized prompt.
 
-Your task: Given a short or vague prompt, generate 1 to 3 clarifying questions. Each question has its own set of 4 short multiple-choice options.
+Your task: Given a user prompt and optional context, decide how many clarifying questions are truly needed (1-5) and generate them. 
 
 RULES:
-- Return ONLY valid JSON — no explanation, no markdown, no code fences.
-- The JSON is an object with a single key "questions" (an array of question objects).
-- Each question object has: "question" (string) and "options" (array of exactly 4 short strings).
-- Generate only as many questions as are truly needed (1-3). Simple prompts need 1 question. Complex ones may need 2-3.
-- Each option should be concise (under 10 words).
-- Questions should be ordered from most important to least.
+- Return ONLY valid JSON (no markdown, no text).
+- The JSON is an object with a key "questions" (array).
+- Each question object has: 
+    - "question" (string)
+    - "type" ("mcq" or "text")
+    - "options" (array of exactly 4 strings for "mcq", empty array [] for "text")
+- Use "text" type for questions that need specific info (deadlines, URLs, names) rather than choices.
+- Order from most important to least.
+- Use the User Profile and Agent context to make questions relevant.
+- Use the Recent History to avoid repeating questions the user has likely already considered.
 
-EXAMPLE (1 question):
-User prompt: "write about AI"
+EXAMPLE:
+User prompt: "plan a trip"
 Output:
-{"questions":[{"question":"What type of content do you need?","options":["A blog post for general readers","A technical deep-dive for developers","A short social media post","A formal business report"]}]}
+{"questions":[{"question":"Where are you going?","type":"text","options":[]},{"question":"What is your budget?","type":"mcq","options":["Budget-friendly","Moderate","Luxury","Ultra-premium"]}]}`;
 
-EXAMPLE (2 questions):
-User prompt: "email the client"
-Output:
-{"questions":[{"question":"What is the email about?","options":["Project update or status","Delay or problem notification","Request for feedback","Invoice or payment"]},{"question":"What tone should it have?","options":["Formal and professional","Friendly but direct","Apologetic and empathetic","Confident and assertive"]}]}`;
 
 export async function POST(req: Request) {
     const corsHeaders = getCorsHeaders(req);
@@ -41,20 +41,26 @@ export async function POST(req: Request) {
         }
 
         const body = await req.json();
-        const { text } = body;
+        const { text, agentName, globalProfile, recentContext } = body;
 
         if (!text || typeof text !== 'string' || text.trim().length === 0) {
             return NextResponse.json({ error: 'Text is required' }, { status: 400, headers: corsHeaders });
         }
 
+        const contextInfo = `
+User Profile: ${globalProfile || 'Not provided'}
+Active Agent: ${agentName || 'General'}
+Recent History: ${recentContext || 'None'}
+`.trim();
+
         const completion = await groq.chat.completions.create({
             messages: [
                 { role: 'system', content: CLARIFY_SYSTEM_PROMPT },
-                { role: 'user', content: text.trim() }
+                { role: 'user', content: `Context:\n${contextInfo}\n\nPrompt: ${text.trim()}` }
             ],
             model: 'llama-3.3-70b-versatile',
             temperature: 0.4,
-            max_tokens: 512,
+            max_tokens: 1024,
         });
 
         const raw = completion.choices[0]?.message?.content?.trim() || '';
@@ -62,38 +68,34 @@ export async function POST(req: Request) {
         const fallback = {
             questions: [
                 {
-                    question: 'What are you trying to accomplish?',
-                    options: [
-                        'Make it more detailed and specific',
-                        'Keep it simple and concise',
-                        'Make it more professional',
-                        'Adjust the tone and style'
-                    ]
+                    question: 'How can I best help you with this?',
+                    type: 'text',
+                    options: []
                 }
             ]
         };
 
-        let parsed: { questions: { question: string; options: string[] }[] };
+        let parsed: { questions: { question: string; options?: string[]; type?: string }[] };
         try {
             parsed = JSON.parse(raw);
         } catch {
             return NextResponse.json(fallback, { headers: corsHeaders });
         }
 
-        if (
-            !Array.isArray(parsed.questions) ||
-            parsed.questions.length === 0 ||
-            !parsed.questions.every(q => typeof q.question === 'string' && Array.isArray(q.options) && q.options.length >= 2)
-        ) {
+        if (!Array.isArray(parsed.questions) || parsed.questions.length === 0) {
             return NextResponse.json(fallback, { headers: corsHeaders });
         }
 
-        // Normalize: cap at 3 questions, cap each to 4 options
+        // Normalize and validate
         return NextResponse.json({
-            questions: parsed.questions.slice(0, 3).map(q => ({
-                question: q.question,
-                options: q.options.slice(0, 4)
-            }))
+            questions: parsed.questions.slice(0, 5).map(q => {
+                const type = q.type === 'text' ? 'text' : 'mcq';
+                return {
+                    question: q.question || 'What are the next steps?',
+                    type: type,
+                    options: type === 'mcq' ? (Array.isArray(q.options) ? q.options.slice(0, 4) : ['Option 1', 'Option 2', 'Option 3', 'Option 4']) : []
+                };
+            })
         }, { headers: corsHeaders });
 
     } catch (error: any) {
