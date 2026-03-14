@@ -4,7 +4,7 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { BrainCircuit, Flame, Zap, LayoutGrid, BadgeDollarSign, ArrowRight, Heart } from 'lucide-react';
+import { BrainCircuit, Flame, Zap, LayoutGrid, BadgeDollarSign, ArrowRight } from 'lucide-react';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -38,7 +38,7 @@ export default function Home() {
               <span style={{ fontFamily: 'var(--font-display)', fontSize: scrolled ? '20px' : '24px', fontWeight: 600, letterSpacing: '1px', transition: 'all 0.6s' }}>REPROMPT</span>
             </div>
             <nav style={{ marginLeft: '16px', display: 'flex', gap: '24px' }}>
-              {[['Pricing', '/pricing'], ['Download', '/download'], ['Open Source', '/opensource'], ['Founder', '/founder']].map(([label, href]) => (
+              {[['Pricing', '/pricing'], ['Download', '/download']].map(([label, href]) => (
                 <Link key={href} href={href} style={{ color: '#fff', textDecoration: 'none', fontSize: '14px', fontWeight: 500, opacity: 0.6, transition: 'opacity 0.2s' }}
                   onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
                   onMouseLeave={(e) => e.currentTarget.style.opacity = '0.6'}>
@@ -273,9 +273,6 @@ export default function Home() {
                 <Link href="/download" className="md-btn md-btn-tonal" style={{ padding: '16px 48px', fontSize: '18px', borderRadius: '100px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   Download for Windows
                 </Link>
-                <Link href="/opensource" className="md-btn md-btn-tonal" style={{ padding: '16px 48px', fontSize: '18px', borderRadius: '100px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', border: '1px solid rgba(255,255,255,0.2)', backgroundColor: 'transparent', color: '#fff' }}>
-                  Open Source Version
-                </Link>
               </div>
             </SignedOut>
             <SignedIn>
@@ -297,39 +294,13 @@ export default function Home() {
                 <Link href="/download" className="md-btn md-btn-tonal" style={{ padding: '16px 48px', fontSize: '18px', borderRadius: '100px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   Download for Windows
                 </Link>
-                <Link href="/opensource" className="md-btn md-btn-tonal" style={{ padding: '16px 48px', fontSize: '18px', borderRadius: '100px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', border: '1px solid rgba(255,255,255,0.2)', backgroundColor: 'transparent', color: '#fff' }}>
-                  Open Source Version
-                </Link>
               </div>
             </SignedIn>
             <p style={{ marginTop: '32px', opacity: 0.6, fontSize: '17px', color: '#A3FFB4' }}>Includes 10 Free Optimizations Every Month.</p>
           </div>
         </section>
 
-        {/* FOUNDER FOOTER */}
-        <section style={{ padding: '100px 24px', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-          <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-            <Link href="/founder" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <div style={{
-                padding: '40px',
-                borderRadius: '32px',
-                backgroundColor: 'rgba(255,255,255,0.02)',
-                border: '1px solid rgba(255,255,255,0.05)',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer'
-              }} className="hover-glow">
-                <Heart style={{ color: '#ec4899', marginBottom: '20px' }} />
-                <h3 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '12px' }}>A message from Aawej</h3>
-                <p style={{ opacity: 0.55, fontSize: '15px', lineHeight: 1.7 }}>
-                  &ldquo;I don&apos;t have a giant team or a custom domain yet. I&apos;m just a student from Satara with a vision for better AI tools. Click to read my story.&rdquo;
-                </p>
-                <div style={{ marginTop: '20px', color: 'var(--md-sys-color-primary)', fontSize: '14px', fontWeight: 500 }}>
-                  Read the Founder&apos;s Story →
-                </div>
-              </div>
-            </Link>
-          </div>
-        </section>
+
 
       </main>
 
