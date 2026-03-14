@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RePrompt Cloud - SaaS Backend & Management
 
-## Getting Started
+This is the official SaaS backend for [RePrompt](https://github.com/pathanaawej0-dot/Startup-reprompt-desktop-app-windows-). It handles user authentication, credit management, global profiles, and the advanced AI optimization pipeline.
 
-First, run the development server:
+## 🚀 Key Responsibilities
+
+- **🔐 Authentication**: Secure JWT-based auth via Clerk/Custom Auth.
+- **💳 Credit System**: Manages user usage and API credit limits via Vercel Postgres.
+- **🧠 AI Pipeline**: Proxies and enhances requests to Groq models with COSTAR/AUTOMAT frameworks.
+- **🔄 Sync Service**: Keeps user agents and global profiles synchronized across devices.
+- **📈 Analytics**: Logs usage patterns for continuous prompt engineering refinement.
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14+ (App Router)
+- **Database**: Vercel Postgres (SQL)
+- **Styling**: Tailwind CSS
+- **AI**: Groq SDK + Llama 3 models
+
+## 📖 API Documentation
+
+### POST `/api/optimize`
+Optimizes raw text using a specific agent's persona.
+- Returns: `{ optimizedText, explanation }`
+
+### POST `/api/clarify`
+Generates MCQ/Text hybrid questions for vague prompts.
+- Returns: `{ questions: [...] }`
+
+### POST `/api/evaluate`
+Evaluates AI responses and generates follow-up prompts.
+- Returns: `{ followUpPrompt }`
+
+## 🏗️ Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Built with ❤️ for the RePrompt ecosystem.**
