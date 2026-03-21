@@ -71,12 +71,12 @@ Do you have enough information to proceed?
 - If YES: Output {"action": "optimize"}
 - If NO: Output {"action": "ask"} and provide EXACTLY 1 Multiple Choice Question to gather the missing context.
 
-${isArchitect ? \`CRITICAL RULE FOR CO-STAR ARCHITECT:
+${isArchitect ? `CRITICAL RULE FOR CO-STAR ARCHITECT:
 You must be incredibly strict. You are building a CO-STAR structured prompt.
 Evaluate the user's input regardless of its length. Look strictly for the presence of the Core Variables: Context, Objective, Style, Tone, Audience, and Format.
 If ANY of these variables are missing, ambiguous, or assumed, you MUST output "ask" to clarify them.
-Only if the provided text unequivocally defines all necessary variables, you may output "optimize".\` : \`CRITICAL RULE FOR OMNI AGENT:
-You are building an informal, chatty prompt. Be lenient. If you understand the core goal, output "optimize". Do not over-interrogate.\`}
+Only if the provided text unequivocally defines all necessary variables, you may output "optimize".` : `CRITICAL RULE FOR OMNI AGENT:
+You are building an informal, chatty prompt. Be lenient. If you understand the core goal, output "optimize". Do not over-interrogate.`}
 
 ANTI-HALLUCINATION SAFEGUARD:
 You have a strict knowledge cutoff. If the user's prompt mentions a modern technology, brand, or concept that you do not confidently recognize, DO NOT guess or hallucinate.
