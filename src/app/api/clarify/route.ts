@@ -41,22 +41,58 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: corsHeaders });
         }
 
-        const body = await req.json();
-        const { text, agentName, globalProfile, recentContext } = body;
+        const { text, agentName, globalProfile, recentContext, previousQuestions } = await req.json();
 
         if (!text || typeof text !== 'string' || text.trim().length === 0) {
             return NextResponse.json({ error: 'Text is required' }, { status: 400, headers: corsHeaders });
         }
 
+        let formattedHistory = 'None';
+        if (Array.isArray(previousQuestions) && previousQuestions.length > 0) {
+            formattedHistory = previousQuestions.map((qa: any, i: number) => `Q${i + 1}: ${qa.question}\nA${i + 1}: ${qa.answer}`).join('\n\n');
+        }
+
         const contextInfo = `
 User Profile: ${globalProfile || 'Not provided'}
 Active Agent: ${agentName || 'General'}
-Recent History: ${recentContext || 'None'}
+Recent App Context: ${recentContext || 'None'}
+Conversation History (Previously Asked Questions):
+${formattedHistory}
 `.trim();
+
+        const isArchitect = agentName === 'CO-STAR Architect';
+
+        const dynamicSystemPrompt = `You are a Principal NLP Engineer with 10 years of experience at OpenAI and Google AI. Your specialty is Predictive User Intent Analysis.
+
+A user has provided an initial thought. You are evaluating their text and conversation history to determine if you have enough context to generate a flawless, professional AI prompt.
+
+Current Goal: Evaluate the Conversation History and the Prompt.
+Do you have enough information to proceed?
+- If YES: Output {"action": "optimize"}
+- If NO: Output {"action": "ask"} and provide EXACTLY 1 Multiple Choice Question to gather the missing context.
+
+${isArchitect ? \`CRITICAL RULE FOR CO-STAR ARCHITECT:
+You must be incredibly strict. You are building a CO-STAR structured prompt.
+Evaluate the user's input regardless of its length. Look strictly for the presence of the Core Variables: Context, Objective, Style, Tone, Audience, and Format.
+If ANY of these variables are missing, ambiguous, or assumed, you MUST output "ask" to clarify them.
+Only if the provided text unequivocally defines all necessary variables, you may output "optimize".\` : \`CRITICAL RULE FOR OMNI AGENT:
+You are building an informal, chatty prompt. Be lenient. If you understand the core goal, output "optimize". Do not over-interrogate.\`}
+
+ANTI-HALLUCINATION SAFEGUARD:
+You have a strict knowledge cutoff. If the user's prompt mentions a modern technology, brand, or concept that you do not confidently recognize, DO NOT guess or hallucinate.
+Instead, you MUST prioritize using your clarification question to ask the user to briefly define what that specific term means (e.g., "What is [Term]?").
+
+RULES:
+1. Generate EXACTLY 1 Multiple Choice Question (MCQ) if asking.
+2. The MCQ must provide EXACTLY 4 highly specific options that finish their thought.
+3. Return ONLY valid JSON (no markdown, no conversational text).
+4. The JSON must be an object with: "action" (string: "ask" or "optimize").
+5. If action is "ask", include "questions" (array of 1 object).
+6. The question object has: "question" (string), "type" (must be "mcq"), "options" (array of objects with "title" and "description" sentences).`;
 
         const completion = await groq.chat.completions.create({
             messages: [
-                { role: 'system', content: CLARIFY_SYSTEM_PROMPT },
+                { role: 'system', content: dynamicSystemPrompt },
                 { role: 'user', content: `Context:\n${contextInfo}\n\nPrompt: ${text.trim()}` }
             ],
             model: 'llama-3.3-70b-versatile',
@@ -66,30 +102,23 @@ Recent History: ${recentContext || 'None'}
 
         const raw = completion.choices[0]?.message?.content?.trim() || '';
 
-        const fallback = {
-            questions: [
-                {
-                    question: 'How can I best help you with this?',
-                    type: 'text',
-                    options: []
-                }
-            ]
-        };
+        const fallback = { action: 'optimize' };
 
-        let parsed: { questions: { question: string; options?: string[]; type?: string }[] };
+        let parsed: any;
         try {
             parsed = JSON.parse(raw);
         } catch {
             return NextResponse.json(fallback, { headers: corsHeaders });
         }
 
-        if (!Array.isArray(parsed.questions) || parsed.questions.length === 0) {
-            return NextResponse.json(fallback, { headers: corsHeaders });
+        if (parsed.action === 'optimize' || !Array.isArray(parsed.questions) || parsed.questions.length === 0) {
+            return NextResponse.json({ action: 'optimize' }, { headers: corsHeaders });
         }
 
         // Normalize and validate
         return NextResponse.json({
-            questions: parsed.questions.slice(0, 5).map(q => {
+            action: 'ask',
+            questions: parsed.questions.slice(0, 1).map((q: any) => {
                 const type = q.type === 'text' ? 'text' : 'mcq';
                 return {
                     question: q.question || 'What are the next steps?',
