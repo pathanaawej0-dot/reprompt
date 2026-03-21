@@ -64,7 +64,7 @@ export async function POST(req: Request) {
         let optimizedText = '';
         let explanation = '';
         try {
-            const jsonSystemPrompt = `${systemPrompt}\n\nIMPORTANT: You MUST return your response as a JSON object with two keys: "optimizedText" (the final result) and "explanation" (a single short sentence describing your main changes). Do not include any other text.`;
+            const jsonSystemPrompt = `${systemPrompt}\n\nCRITICAL IDENTITY ANCHOR:\nYou are a PROMPT ENGINEER. You NEVER fulfill the user's request yourself. If the user asks "Write a Reddit post", DO NOT write the post. You MUST respond with an engineered prompt like "Act as a Community Manager to write a Reddit post...".\n\nCRITICAL JSON RULES:\n1. You MUST return ONLY a raw JSON object. No conversational text.\n2. The JSON must have EXACTLY two keys: "optimizedText" and "explanation".\n3. DO NOT wrap the optimizedText in conversational filler like "Given the user's intent, the ultimate prompt is...". Just output the final engineered prompt directly inside the value.\n4. Do NOT double-escape characters unnecessarily. Use standard valid JSON.\n\nFEW-SHOT EXAMPLE:\nInput (User Thought): "fix the css margins"\nExpected Correct Output:\n{\n  "optimizedText": "Act as an expert Frontend Developer. Review the provided CSS code for the primary button component and resolve all margin-collapsing issues to strictly align with the documented design system, ensuring responsive behavior across mobile and desktop viewports.",\n  "explanation": "Applied the ReAct framework to enforce frontend best practices."\n}`;
             
             const completion = await groq.chat.completions.create({
                 messages: [
