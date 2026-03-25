@@ -15,6 +15,30 @@ export async function GET(req: Request) {
         if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: corsHeaders });
 
         // Multi-stage seeding: ensure ALL built-in agents exist for this user in the DB
+        const builtInIds = builtInAgents.map(a => `${a.id}_${userId}`);
+        console.log(`[Sync] User: ${userId}, Built-ins: ${builtInIds.join(', ')}`);
+        
+        // Extended Cleanup: remove any agents that are marked as built-in but aren't in our current list
+        // OR legacy agents that we've retired.
+        const legacyPrefixes = [
+            'refiner', 'architect', 'simple_optimizer', 'grammar_fixer', 
+            'general_assistant', 'translator', 'summarizer', 'email_writer', 
+            'creative_writer', 'code_helper', 'clarify_agent', 'prompt_engineer'
+        ];
+        const legacyIds = legacyPrefixes.map(p => `${p}_${userId}`);
+
+        const deleteResult = await sql`
+            DELETE FROM agents 
+            WHERE user_id = ${userId} 
+            AND (
+                (is_built_in = true AND id != ALL(${builtInIds}))
+                OR 
+                (id = ANY(${legacyIds}))
+            )
+            RETURNING id
+        `;
+        console.log(`[Sync] Purged ${deleteResult.length} stale/legacy agents.`);
+
         for (const agent of builtInAgents) {
             const agentId = `${agent.id}_${userId}`;
             await sql`
@@ -27,7 +51,10 @@ export async function GET(req: Request) {
                     ${agent.system_prompt}, ${agent.is_built_in}, ${agent.enabled}, 
                     ${agent.icon}, NOW()
                 )
-                ON CONFLICT (id) DO NOTHING
+                ON CONFLICT (id) DO UPDATE 
+                SET 
+                    is_built_in = true,
+                    updated_at = NOW()
             `;
         }
 
@@ -35,12 +62,13 @@ export async function GET(req: Request) {
             SELECT * FROM agents WHERE user_id = ${userId} ORDER BY created_at DESC
         `;
 
+        console.log(`[Sync] Agents in DB: ${finalAgents.map((a: any) => `${a.id} (${a.name})`).join(', ')}`);
+        
         // Fetch User Credits
-        const userRec = await sql`SELECT api_calls_count FROM users WHERE id = ${userId}`;
-        const creditsUsed = userRec[0]?.api_calls_count || 0;
-        const totalCredits = 100; // Assuming 100 max credits for now
+        const userRec = await sql`SELECT credits FROM users WHERE id = ${userId}`;
+        const credits = userRec[0]?.credits ?? 0;
 
-        return NextResponse.json({ agents: finalAgents, credits: Math.max(0, totalCredits - creditsUsed) }, { headers: corsHeaders });
+        return NextResponse.json({ agents: finalAgents, credits }, { headers: corsHeaders });
     } catch (error: any) {
         console.error('Fetch agents error:', error);
         return NextResponse.json({ error: error?.message || 'Internal Server Error' }, { status: 500, headers: corsHeaders });
