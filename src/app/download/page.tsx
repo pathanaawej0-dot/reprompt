@@ -60,24 +60,23 @@ export default function DownloadPage() {
                     textAlign: 'center',
                     marginBottom: '80px'
                 }}>
-                    <h3 style={{ fontSize: '24px', fontWeight: 600, marginBottom: '40px' }}>RePrompt for Windows</h3>
-                    <a href="/download/RePrompt-Setup-2.1.3.exe" download className="md-btn" style={{
-                        padding: '24px 64px',
-                        fontSize: '24px',
-                        backgroundColor: '#fff',
-                        color: '#091C10',
-                        borderRadius: '100px',
-                        fontWeight: 600,
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '12px',
-                        border: 'none',
-                        cursor: 'pointer',
-                        textDecoration: 'none'
-                    }}>
-                        Download .exe <Download size={24} />
-                    </a>
-                    <p style={{ marginTop: '24px', opacity: 0.4, fontSize: '14px' }}>Version 2.1.3 • Approx 79MB</p>
+                    <span className="text-blue-400 font-semibold mb-2 block">Latest Version: v2.1.4</span>
+                    <h2 className="text-3xl font-bold mb-4">Windows Desktop App</h2>
+                    <p className="text-gray-400 mb-8">
+                        Get the full RePrompt experience with system-wide shortcuts,
+                        instant optimization, and seamless workflow integration.
+                    </p>
+                    <div className="space-y-4">
+                        <a
+                            href="/download/RePrompt-Setup-2.1.4.exe"
+                            download
+                            className="flex items-center justify-center gap-3 w-full py-4 bg-blue-600 hover:bg-blue-700 rounded-xl font-bold text-lg transition-all group"
+                        >
+                            <Download className="w-6 h-6 group-hover:bounce" />
+                            Download for Windows
+                        </a>
+                        <p style={{ marginTop: '24px', opacity: 0.4, fontSize: '14px' }}>Version 2.1.4 • Approx 79MB</p>
+                    </div>
                 </div>
 
 
