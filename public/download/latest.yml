@@ -1,8 +1,8 @@
-version: 2.1.2
+version: 2.1.3
 files:
-  - url: RePrompt-Setup-2.1.2.exe
-    sha512: qL1ne9JbHOxSiohQSNv216b5pOSV4qeOZvNDbhA2Dnb/qP5NZTG7OgwPVM0SIfbk5eGq51Sh8hrqAIVzEsqP/w==
-    size: 83486836
-path: RePrompt-Setup-2.1.2.exe
-sha512: qL1ne9JbHOxSiohQSNv216b5pOSV4qeOZvNDbhA2Dnb/qP5NZTG7OgwPVM0SIfbk5eGq51Sh8hrqAIVzEsqP/w==
-releaseDate: '2026-03-26T07:05:57.733Z'
+  - url: RePrompt-Setup-2.1.3.exe
+    sha512: opNrJhYd+O444O4sclFfTxLkOdnQ9rOr14S25CWcrFFRw9EBG4fHPzTOxYLPw3jA05T3lpavhuB49LWHymWMKw==
+    size: 83487750
+path: RePrompt-Setup-2.1.3.exe
+sha512: opNrJhYd+O444O4sclFfTxLkOdnQ9rOr14S25CWcrFFRw9EBG4fHPzTOxYLPw3jA05T3lpavhuB49LWHymWMKw==
+releaseDate: '2026-03-26T08:51:07.351Z'
