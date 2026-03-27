@@ -249,7 +249,7 @@ export default function Home() {
               Type your raw thought. Hit the shortcut. Let RePrompt do the translation.
             </p>
             <p style={{ fontSize: '18px', color: '#A3FFB4', opacity: 0.6, marginBottom: '56px' }}>
-              $15 / month — 1,500 instant optimizations.
+              $5 / month — 1,500 instant optimizations.
             </p>
             <SignedOut>
               <SignInButton mode="modal">

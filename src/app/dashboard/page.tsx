@@ -466,7 +466,7 @@ export default function DashboardPage() {
                             }}>
                                 <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '32px', fontWeight: 500, marginBottom: '8px', color: 'var(--md-sys-color-primary)' }}>Pro Plan</h2>
                                 <p style={{ fontFamily: 'var(--font-body)', fontSize: '32px', fontWeight: 400, marginBottom: '24px', borderBottom: '1px solid var(--md-sys-color-outline-variant)', paddingBottom: '24px' }}>
-                                    $15 <span style={{ fontSize: '14px', color: '#888' }}>/month</span>
+                                    $5 <span style={{ fontSize: '14px', color: '#888' }}>/month</span>
                                 </p>
                                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, flexGrow: 1, marginBottom: '48px', fontFamily: 'var(--font-body)', fontSize: '16px', lineHeight: '2' }}>
                                     <li style={{ marginBottom: '16px', display: 'flex', alignItems: 'center' }}>

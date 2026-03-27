@@ -45,30 +45,6 @@ export default function Pricing() {
                     <ArrowLeft size={20} /> Back to Story
                 </Link>
 
-                {/* TRUST BANNER */}
-                <div style={{
-                    backgroundColor: 'rgba(99, 102, 241, 0.05)',
-                    border: '1px solid rgba(99, 102, 241, 0.2)',
-                    borderRadius: '24px',
-                    padding: '24px 32px',
-                    marginBottom: '64px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '24px',
-                    textAlign: 'left'
-                }}>
-                    <Heart style={{ color: '#ec4899', flexShrink: 0 }} size={32} />
-                    <div>
-                        <h4 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '4px' }}>Transparent by Design</h4>
-                        <p style={{ fontSize: '14px', opacity: 0.7, lineHeight: 1.5 }}>
-                            RePrompt is an indie project built by a student from Satara. We don't have a custom domain or a giant marketing team—just a commitment to building the best AI workflow for you.
-                            <Link href="/founder" style={{ color: 'var(--md-sys-color-primary)', textDecoration: 'none', marginLeft: '8px', fontWeight: 600 }}>
-                                Read the Founder's Story →
-                            </Link>
-                        </p>
-                    </div>
-                </div>
-
                 <div style={{ textAlign: 'center', marginBottom: '80px' }}>
                     <h1 className="sys-headline-xl" style={{ fontSize: '80px', marginBottom: '24px' }}>Simple Choice.</h1>
                     <p className="sys-subhead" style={{ fontSize: '24px', opacity: 0.6, maxWidth: '600px', margin: '0 auto' }}>
@@ -144,7 +120,7 @@ export default function Pricing() {
                         </div>
 
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '32px' }}>
-                            <span style={{ fontSize: '56px', fontWeight: 600 }}>$15</span>
+                            <span style={{ fontSize: '56px', fontWeight: 600 }}>$5</span>
                             <span style={{ opacity: 0.4 }}>/month</span>
                         </div>
 
